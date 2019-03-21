@@ -36,7 +36,7 @@ Compile and install Nginx from source with optional modules.
 Just download and execute the script :
 
 ```sh
-wgethttps://github.com/mohamednizar/nginx-autoinstall/master/nginx-autoinstall.sh
+wget https://github.com/mohamednizar/nginx-autoinstall/master/nginx-autoinstall.sh
 chmod +x nginx-autoinstall.sh
 ./nginx-autoinstall.sh
 ```
