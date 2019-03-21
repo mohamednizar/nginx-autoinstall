@@ -71,6 +71,9 @@ case $OPTION in
 		while [[ $CACHEPURGE != "y" && $CACHEPURGE != "n" ]]; do
 			read -p "       ngx_cache_purge [y/n]: " -e CACHEPURGE
 		done
+		while [[ $STICKY != "y" && $STICKY != "n" ]]; do
+			read -p "Goodies Sticky session [y/n]: " -e STICKY
+		done
 		echo ""
 		echo "Choose your OpenSSL implementation :"
 		echo "   1) System's OpenSSL ($(openssl version | cut -c9-14))"
@@ -191,6 +194,24 @@ case $OPTION in
 			./config
 		fi
 
+		# Sticky 
+		if [[ "$STICKY" = 'y' ]]; then
+			cd /usr/local/src/nginx/modules
+			echo -ne "       Downloading nginx-sticky-module    [..]\r"
+			git clone https://github.com/lusis/nginx-sticky-module >> /tmp/nginx-autoinstall.log 2>&1			
+
+			if [ $? -eq 0 ]; then
+				echo -ne "       Downloading nginx-sticky-module   [${CGREEN}OK${CEND}]\r"
+				echo -ne "\n"
+			else
+				echo -e "       Downloading nginx-sticky-modulee   [${CRED}FAIL${CEND}]"
+				echo ""
+				echo "Please look at /tmp/nginx-autoinstall.log"
+				echo ""
+				exit 1
+			fi
+		fi
+
 		# Download and extract of Nginx source code
 		cd /usr/local/src/nginx/ || exit 1
 		wget -qO- http://nginx.org/download/nginx-${NGINX_VER}.tar.gz | tar zxf -
@@ -262,6 +283,10 @@ case $OPTION in
 		if [[ "$FANCYINDEX" = 'y' ]]; then
 			git clone --quiet https://github.com/aperezdc/ngx-fancyindex.git /usr/local/src/nginx/modules/fancyindex
 			NGINX_MODULES=$(echo "$NGINX_MODULES"; echo --add-module=/usr/local/src/nginx/modules/fancyindex)
+		fi
+		# Cache Purge Module
+		if [[ "$STICKY" = 'y' ]]; then
+			NGINX_MODULES=$(echo $NGINX_MODULES; echo "--add-module=/usr/local/src/nginx/modules/nginx-sticky-module")
 		fi
 
 		./configure $NGINX_OPTIONS $NGINX_MODULES
