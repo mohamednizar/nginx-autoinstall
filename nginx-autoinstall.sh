@@ -72,7 +72,7 @@ case $OPTION in
 			read -p "       ngx_cache_purge [y/n]: " -e CACHEPURGE
 		done
 		while [[ $STICKY != "y" && $STICKY != "n" ]]; do
-			read -p "Goodies Sticky session [y/n]: " -e STICKY
+			read -p "		Goodies Sticky session [y/n]: " -e STICKY
 		done
 		echo ""
 		echo "Choose your OpenSSL implementation :"
