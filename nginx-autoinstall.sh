@@ -197,14 +197,14 @@ case $OPTION in
 		# Sticky 
 		if [[ "$STICKY" = 'y' ]]; then
 			cd /usr/local/src/nginx/modules
-			echo -ne "       Downloading nginx-sticky-module    [..]\r"
-			git clone https://github.com/lusis/nginx-sticky-module >> /tmp/nginx-autoinstall.log 2>&1			
+			echo -ne "       Downloadingnginx-sticky-module-ng    [..]\r"
+			git clone https://github.com/thomsonreuters/nginx-sticky-module-ng >> /tmp/nginx-autoinstall.log 2>&1			
 
 			if [ $? -eq 0 ]; then
-				echo -ne "       Downloading nginx-sticky-module   [${CGREEN}OK${CEND}]\r"
+				echo -ne "       Downloading nginx-sticky-module-ng   [${CGREEN}OK${CEND}]\r"
 				echo -ne "\n"
 			else
-				echo -e "       Downloading nginx-sticky-modulee   [${CRED}FAIL${CEND}]"
+				echo -e "       Downloading nginx-sticky-module-ng  [${CRED}FAIL${CEND}]"
 				echo ""
 				echo "Please look at /tmp/nginx-autoinstall.log"
 				echo ""
@@ -286,7 +286,7 @@ case $OPTION in
 		fi
 		# Cache Purge Module
 		if [[ "$STICKY" = 'y' ]]; then
-			NGINX_MODULES=$(echo $NGINX_MODULES; echo "--add-module=/usr/local/src/nginx/modules/nginx-sticky-module")
+			NGINX_MODULES=$(echo $NGINX_MODULES; echo "--add-module=/usr/local/src/nginx/modules/nginx-sticky-module-ng")
 		fi
 
 		./configure $NGINX_OPTIONS $NGINX_MODULES
