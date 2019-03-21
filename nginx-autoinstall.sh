@@ -198,7 +198,7 @@ case $OPTION in
 		if [[ "$STICKY" = 'y' ]]; then
 			cd /usr/local/src/nginx/modules
 			echo -ne "       Downloadingnginx-sticky-module-ng    [..]\r"
-			git clone https://github.com/thomsonreuters/nginx-sticky-module-ng >> /tmp/nginx-autoinstall.log 2>&1			
+			git clone https://bitbucket.org/nginx-goodies/nginx-sticky-module-ng >> /tmp/nginx-autoinstall.log 2>&1			
 
 			if [ $? -eq 0 ]; then
 				echo -ne "       Downloading nginx-sticky-module-ng   [${CGREEN}OK${CEND}]\r"
