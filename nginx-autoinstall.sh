@@ -249,7 +249,15 @@ case $OPTION in
 		--with-http_auth_request_module \
 		--with-http_slice_module \
 		--with-http_stub_status_module \
-		--with-http_realip_module"
+		--with-http_realip_module \
+		--with-http_addition_module \
+		--with-http_sub_module \
+		--with-http_gunzip_module \
+		--with-http_gzip_static_module \
+		--with-threads \
+		--with-stream \
+		--with-stream_realip_module \
+		--with-compat"
 
 		# Optional modules
 		if [[ "$LIBRESSL" = 'y' ]]; then
